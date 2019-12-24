@@ -1,0 +1,12 @@
+{
+  "name": "axure-quick-electronjs",
+  "version": "0.20191224171319",
+  "main": "main.js",
+  "repository": "https://github.com/cxwithyxy/axure_quick_electronjs.git",
+  "author": "cxwithyxy@gmail.com",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^7.1.7",
+    "typescript": "^3.7.4"
+  }
+}
