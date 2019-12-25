@@ -11,7 +11,7 @@ export class Axure_window extends BrowserWindow
         }
         _.merge(options, {
             webPreferences: {
-                preload: `${__dirname}/../../build/renderer_process/main.js`
+                preload: `${__dirname}/../renderer_process/main.js`
             }
         })
         super(options);
