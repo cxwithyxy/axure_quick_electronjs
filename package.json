@@ -11,7 +11,7 @@
     "typescript": "^3.7.4"
   },
   "scripts": {
-    "start": "tsc && electron .",
+    "test": "tsc && electron ./build/test/main.js",
     "npm_pack": "npm pack"
   },
   "dependencies": {

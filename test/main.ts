@@ -1,5 +1,5 @@
 import { app } from "electron";
-import { Axure_window } from "./Axure_window";
+import { Axure_window } from "../src/main_process/Axure_window";
 
 app.on("ready", async () => 
 {
