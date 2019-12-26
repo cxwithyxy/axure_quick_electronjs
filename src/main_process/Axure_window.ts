@@ -18,8 +18,6 @@ export class Axure_window extends BrowserWindow
         if(options?.axure_preload)
         {
             axure_preload = `axure_preload:${options.axure_preload}`
-            console.log(axure_preload);
-            
         }
         _.merge(options, {
             webPreferences: {
@@ -33,6 +31,10 @@ export class Axure_window extends BrowserWindow
     async load_start_url(url: string): Promise<void>
     {
         await this.loadURL(url)
-        await this.webContents.executeJavaScript(`main()`)
+        this.webContents.once("did-finish-load", async () =>
+        {
+            await this.webContents.executeJavaScript(`main()`)
+        })
+        await this.webContents.executeJavaScript(`get_into_iframe()`)
     }
 }
