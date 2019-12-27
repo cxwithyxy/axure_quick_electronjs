@@ -7,11 +7,13 @@
   "license": "MIT",
   "devDependencies": {
     "@types/lodash": "^4.14.149",
+    "del-cli": "^3.0.0",
     "electron": "^7.1.7",
     "typescript": "^3.7.4"
   },
   "scripts": {
-    "test": "tsc && electron ./build/test/main.js",
+    "ts_build": "yarn del-cli ./build && yarn tsc",
+    "test": "yarn ts_build && electron ./build/test/main.js",
     "npm_pack": "npm pack"
   },
   "dependencies": {

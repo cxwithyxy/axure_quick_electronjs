@@ -1,17 +1,28 @@
 import { BrowserWindow, BrowserWindowConstructorOptions } from "electron";
 import _ from "lodash";
 
+interface Axure_window_options extends BrowserWindowConstructorOptions
+{
+    axure_preload?: string
+}
+
 export class Axure_window extends BrowserWindow
 {
-    constructor (options?: BrowserWindowConstructorOptions | undefined)
+    constructor (options?: Axure_window_options | undefined)
     {
+        let axure_preload
         if(!options)
         {
             options = {}
         }
+        if(options?.axure_preload)
+        {
+            axure_preload = `axure_preload:${options.axure_preload}`
+        }
         _.merge(options, {
             webPreferences: {
-                preload: `${__dirname}/../../build/renderer_process/main.js`
+                preload: `${__dirname}/../renderer_process/main.js`,
+                additionalArguments: [axure_preload]
             }
         })
         super(options);
@@ -20,6 +31,10 @@ export class Axure_window extends BrowserWindow
     async load_start_url(url: string): Promise<void>
     {
         await this.loadURL(url)
-        await this.webContents.executeJavaScript(`main()`)
+        this.webContents.once("did-finish-load", async () =>
+        {
+            await this.webContents.executeJavaScript(`main()`)
+        })
+        await this.webContents.executeJavaScript(`get_into_iframe()`)
     }
 }
