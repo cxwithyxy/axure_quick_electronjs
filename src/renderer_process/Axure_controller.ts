@@ -1,6 +1,12 @@
 import { remote } from "electron";
 import _ from "lodash";
-
+interface Axure_controller_sub_process_functions_interface
+{
+    [propName: string]: Function;
+}
+interface Axure_global extends NodeJS.Global{
+    Axure_controller_sub_process_functions: Axure_controller_sub_process_functions_interface
+}
 export class Axure_controller
 {
     function_call_after_main_called?: Function
@@ -8,6 +14,24 @@ export class Axure_controller
     constructor()
     {
         this.axure_preload()
+    }
+
+    on_sub_process_loaded()
+    {
+        let funcs:Axure_controller_sub_process_functions_interface = {};
+        funcs.get_into_iframe = async () =>
+        {
+            await this.get_into_iframe()
+        };
+        funcs.main = async () =>
+        {
+            if(this.function_call_after_main_called)
+            {
+                await this.function_call_after_main_called()
+            }
+        };
+        (<Axure_global>global).Axure_controller_sub_process_functions = funcs
+
     }
     
     axure_preload()
