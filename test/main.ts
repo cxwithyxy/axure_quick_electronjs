@@ -8,6 +8,11 @@ app.on("ready", async () =>
     // let b = new Axure_window({
     //     axure_preload: `${__dirname}/./inject_test.js`
     // })
+    (<any>global).mainasd = function ()
+    {
+        console.log("main process asdasdasdas");
+        
+    };
     let t_m_a = new Main_a()
     let b = new Axure_window()
     b.maximize()

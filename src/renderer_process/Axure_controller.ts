@@ -29,6 +29,7 @@ export class Axure_controller
             {
                 await this.function_call_after_main_called()
             }
+            remote.getGlobal("mainasd")();
         };
         (<Axure_global>global).Axure_controller_sub_process_functions = funcs
 
