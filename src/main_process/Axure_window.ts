@@ -31,10 +31,10 @@ export class Axure_window extends BrowserWindow
     async load_start_url(url: string): Promise<void>
     {
         await this.loadURL(url)
-        this.webContents.once("did-finish-load", async () =>
+        this.webContents.on("did-finish-load", async () =>
         {
-            await this.webContents.executeJavaScript(`Axure_controller_sub_process_functions.main()`)
+            await this.webContents.executeJavaScript(`axure_controller.main()`)
         })
-        await this.webContents.executeJavaScript(`Axure_controller_sub_process_functions.get_into_iframe()`)
+        await this.webContents.executeJavaScript(`axure_controller.get_into_iframe()`)
     }
 }

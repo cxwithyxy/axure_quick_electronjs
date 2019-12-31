@@ -13,7 +13,9 @@ app.on("ready", async () =>
         console.log("main process asdasdasdas");
         
     };
-    let t_m_a = new Main_a()
+    (<any>global).aaa = {aaa: () => {return 123123}};
+    let t_m_a = new Main_a();
+    (<any>global).t_m_a = t_m_a;
     let b = new Axure_window()
     b.maximize()
     b.webContents.openDevTools()

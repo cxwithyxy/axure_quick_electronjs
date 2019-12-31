@@ -4,4 +4,9 @@ export class Main_a
     {
         console.log("Main_a");
     }
+    aaa()
+    {
+        console.log(`Main_a aaaa`);
+        
+    }
 }
