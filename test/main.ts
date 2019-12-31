@@ -12,7 +12,7 @@ app.on("ready", async () =>
     let b = new Axure_window()
     b.add_axure_global("t_m_a", t_m_a)
     b.add_axure_global("aaa", {aaa: () => {return 123123}})
-    b.add_axure_global("mainasd", () => {console.log("main process asdasdasdas");})
+    b.add_axure_global("mainasd", () => {console.log("main process asdasdasdas")})
     b.maximize()
     b.webContents.openDevTools()
     await b.load_start_url("http://127.0.0.1:32767/start.html")

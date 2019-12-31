@@ -5,4 +5,5 @@ let a_c = new Axure_controller()
 
 process.on('loaded', () => {
     (<any>global).axure_controller = a_c;
+    a_c.init_global();
 })
