@@ -8,6 +8,15 @@ interface Axure_window_options extends BrowserWindowConstructorOptions
 
 export class Axure_window extends BrowserWindow
 {
+
+    global_name_list:string[]
+
+    add_axure_global(name_in_global: string, everything_you_want: any)
+    {
+        this.global_name_list.push(name_in_global);
+        (<any>global)[name_in_global] = everything_you_want;
+    }
+
     constructor (options?: Axure_window_options | undefined)
     {
         let axure_preload
@@ -26,6 +35,7 @@ export class Axure_window extends BrowserWindow
             }
         })
         super(options);
+        this.global_name_list = []
     }
 
     async load_start_url(url: string): Promise<void>
@@ -33,6 +43,7 @@ export class Axure_window extends BrowserWindow
         await this.loadURL(url)
         this.webContents.on("did-finish-load", async () =>
         {
+            await this.webContents.executeJavaScript(`axure_controller.init_global(${JSON.stringify(this.global_name_list)})`)
             await this.webContents.executeJavaScript(`axure_controller.main()`)
         })
         await this.webContents.executeJavaScript(`axure_controller.get_into_iframe()`)

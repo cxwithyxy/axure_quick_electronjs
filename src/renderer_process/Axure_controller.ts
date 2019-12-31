@@ -10,6 +10,14 @@ export class Axure_controller
         this.axure_preload()
     }
 
+    init_global(global_name_list: string[])
+    {
+        _.forEach(global_name_list, element =>
+        {
+            (<any>window)[element] = remote.getGlobal(element)
+        })
+    }
+
     async main ()
     {
         if(this.function_call_after_main_called)
