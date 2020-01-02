@@ -1,18 +1,21 @@
 {
   "name": "axure-quick-electronjs",
-  "version": "0.20191224171319.0",
-  "main": "build/main_process/main.js",
+  "version": "0.20200102143431.0",
+  "main": "build/src/main_process/Axure_window.js",
   "repository": "https://github.com/cxwithyxy/axure_quick_electronjs.git",
   "author": "cxwithyxy@gmail.com",
   "license": "MIT",
   "devDependencies": {
     "@types/lodash": "^4.14.149",
+    "del-cli": "^3.0.0",
     "electron": "^7.1.7",
+    "make-dir-cli": "^2.0.0",
     "typescript": "^3.7.4"
   },
   "scripts": {
-    "start": "tsc && electron .",
-    "npm_pack": "npm pack"
+    "ts_build": "yarn del-cli ./build && yarn tsc",
+    "test": "yarn ts_build && electron ./build/test/main.js",
+    "npm_pack": "yarn tsc -d && for /F %i in ('npm pack') do ( yarn make-dir ./dist && move %i ./dist/axure-quick-electronjs.tgz)"
   },
   "dependencies": {
     "lodash": "^4.17.15"
