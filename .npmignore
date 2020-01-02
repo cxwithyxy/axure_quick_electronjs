@@ -1,0 +1,6 @@
+build/test
+tsconfig.json
+test
+src
+dist
+.github
