@@ -3,3 +3,4 @@ tsconfig.json
 test
 src
 dist
+.github
